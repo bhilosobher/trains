@@ -1,29 +1,16 @@
-
+/*
+ * this class puts everything together by creating RailwaySystem, a RailwayDisplay,
+ * putting them on a thread and starting the threads
+ */
 public class RunMe {
 	public static void main(String[] args) {
 		RailwaySystem railway = new RailwaySystem();
+		RailwayDisplay railwayView = new RailwayDisplay(railway);
+		
 		Thread trainGenerator =  new Thread(railway);
+		Thread view = new Thread(railwayView);
+		
 		trainGenerator.start();
-		while(true) {
-			System.out.println(railway.toString());
-			try{
-				Thread.sleep(1000);
-			}catch(InterruptedException e) {
-				
-			}
+		view.start();
 		}
-//		CommuterTrain test = new CommuterTrain("10");
-//		IntercityTrain test2 = new IntercityTrain("500");
-//		Thread t = new Thread(test,"Flying's thread");
-//		t.start();
-//		Thread t2 = new Thread(test2,"Hono's thread");
-//		try {
-//			System.out.println(t2.getName()+" is gonna sleep for 2s");
-//			t2.sleep(2000);
-//			System.out.println("slept");
-//		}catch(InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		t2.start();
-	}
 }
